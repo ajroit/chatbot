@@ -23,14 +23,13 @@ document.addEventListener('DOMContentLoaded', () => {
             userInput.focus();
 
             try {
-                const headers = {
+                 const headers = {
                     "Content-Type": "application/json"
-                }
+                 }
 
                 if(sessionId){
                     headers["x-session-id"] = sessionId;
                 }
-
                 const response = await fetch("https://chatbotpage.ajroit-wa.workers.dev/", {
                     method: "POST",
                     headers: headers,
@@ -54,12 +53,3 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    sendButton.addEventListener('click', sendMessage);
-
-    userInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            sendMessage();
-        }
-    });
-});
