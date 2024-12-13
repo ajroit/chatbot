@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
 
-    function appendMessage(content, isUser = false) {
+    // Obtener o generar sessionID
+    let sessionId = localStorage.getItem('sessionId') || null;
+
+     function appendMessage(content, isUser = false) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
         messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
@@ -20,17 +23,28 @@ document.addEventListener('DOMContentLoaded', () => {
             userInput.focus();
 
             try {
+                const headers = {
+                    "Content-Type": "application/json"
+                }
+
+                if(sessionId){
+                    headers["x-session-id"] = sessionId;
+                }
+
                 const response = await fetch("https://chatbotpage.ajroit-wa.workers.dev/", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+                    headers: headers,
                     body: JSON.stringify({ message: message })
                 });
 
                 if (!response.ok) {
                     throw new Error(`Error del servidor: ${response.status}`);
                 }
+
+                // Guardar sessionId
+                sessionId = response.headers.get('x-session-id')
+                localStorage.setItem('sessionId', sessionId);
+
 
                 const data = await response.json();
                 appendMessage(data.botResponse || "Lo siento, no pude generar una respuesta.");
@@ -49,4 +63,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
