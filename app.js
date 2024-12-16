@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     } // <--- Cierre de sendMessage (Línea 56)
-
     sendButton.addEventListener('click', sendMessage);
 
     userInput.addEventListener('keydown', (event) => {
