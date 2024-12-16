@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 appendMessage("Lo siento, ocurrió un error al procesar tu mensaje.");
             }
         }
-    } // <--- Cierre de sendMessage (Línea 56)
+    } 
+ 
     sendButton.addEventListener('click', sendMessage);
 
     userInput.addEventListener('keydown', (event) => {
