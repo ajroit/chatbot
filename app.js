@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Obtener o generar sessionID
     let sessionId = localStorage.getItem('sessionId') || null;
 
-     function appendMessage(content, isUser = false) {
+    function appendMessage(content, isUser = false) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message');
         messageElement.classList.add(isUser ? 'user-message' : 'bot-message');
@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
             userInput.focus();
 
             try {
-                 const headers = {
+                const headers = {
                     "Content-Type": "application/json"
-                 }
+                }
 
-                if(sessionId){
+                if (sessionId) {
                     headers["x-session-id"] = sessionId;
                 }
                 const response = await fetch("https://chatbotpage.ajroit-wa.workers.dev/", {
@@ -53,3 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+
+
+    sendButton.addEventListener('click', sendMessage);
+
+    userInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
+});
