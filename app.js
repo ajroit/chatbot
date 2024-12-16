@@ -52,8 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 appendMessage("Lo siento, ocurrió un error al procesar tu mensaje.");
             }
         }
-    }
-
+   } // <--- ¡Aquí faltaba la llave de cierre de la función sendMessage!
 
     sendButton.addEventListener('click', sendMessage);
 
